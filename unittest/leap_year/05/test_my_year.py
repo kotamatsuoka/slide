@@ -1,5 +1,10 @@
 """
-Pythonっぽく __str__ の特殊メソッドを使いたから、テストメソッドを直す
+実は、閏年の条件は、4で割り切れ雨だけではないことが発覚(仕様変更と思って！)
+テストケースの追加
+
+追加条件
+- 100で割り切れたら、閏年ではない
+- 400で割り切れたら、閏年
 """
 
 import pytest
@@ -9,7 +14,7 @@ class MyYear:
     def __init__(self, value):
         self.value = value
 
-    def to_string(self):
+    def __str__(self):
         return str(self.value)
 
     def is_leap(self):
@@ -37,6 +42,8 @@ def test_str_magic_method():
 @pytest.mark.parametrize("target_year, expected", [
     (2020, True),
     (2019, False),
+    (2100, False),
+    (2000, True),
 ])
 def test_is_leap(target_year, expected):
     actual = MyYear(target_year).is_leap()

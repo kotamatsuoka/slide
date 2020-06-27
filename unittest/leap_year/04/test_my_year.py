@@ -1,5 +1,6 @@
 """
-Pythonっぽく __str__ の特殊メソッドを使いたから、テストメソッドを直す
+プロダクトコードを直す
+「Red」→「Green」
 """
 
 import pytest
@@ -9,7 +10,7 @@ class MyYear:
     def __init__(self, value):
         self.value = value
 
-    def to_string(self):
+    def __str__(self):
         return str(self.value)
 
     def is_leap(self):

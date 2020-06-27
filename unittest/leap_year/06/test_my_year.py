@@ -1,5 +1,6 @@
 """
-Pythonっぽく __str__ の特殊メソッドを使いたから、テストメソッドを直す
+プロダクトコードの変更
+「Red」->「Green」
 """
 
 import pytest
@@ -9,13 +10,15 @@ class MyYear:
     def __init__(self, value):
         self.value = value
 
-    def to_string(self):
+    def __str__(self):
         return str(self.value)
 
     def is_leap(self):
-        if self.value % 4 == 0:
-            return True
-        return False
+        if self.value % 4 != 0:
+            return False
+        if self.value % 100 == 0 and self.value % 400 != 0:
+            return False
+        return True
 
 
 def test_initialize():
@@ -37,6 +40,8 @@ def test_str_magic_method():
 @pytest.mark.parametrize("target_year, expected", [
     (2020, True),
     (2019, False),
+    (2100, False),
+    (2000, True),
 ])
 def test_is_leap(target_year, expected):
     actual = MyYear(target_year).is_leap()

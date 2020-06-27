@@ -1,5 +1,6 @@
 """
 設計のレビューをしてもらえるように、関数の呼び出し方と、テストケースのみを書いてみる
+テストは「Red」の状態でも良い
 
 【閏年問題】
 以下、3つのメソッドを持つMyYearクラスの実装について考える
@@ -31,7 +32,7 @@ def test_initialize():
     assert actual == expected
 
 
-def test_to_datetime():
+def test_to_string():
     target_year = 2020
     actual = MyYear(target_year).to_string()
     expected = str(target_year)
@@ -42,7 +43,6 @@ def test_to_datetime():
 @pytest.mark.parametrize("target_year, expected", [
     (2020, True),
     (2019, False),
-    (2100, False),
 ])
 def test_is_leap(target_year, expected):
     actual = MyYear(target_year).is_leap()
